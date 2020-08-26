@@ -1,42 +1,49 @@
 import React, { useState, useEffect } from "react";
 import { getRoutes } from "./coreapicalls";
-import { signout } from "../auth";
+import { signout, isAuthenticated } from "../auth";
 import { useHistory } from "react-router-dom";
-export default function Home() {
-  const [routes, setRoutes] = useState();
-  const [error, setError] = useState(false);
+import MainGrid from "./MainGrid";
 
+export default function Home() {
+  const [filteredData, setFilteredData] = useState([]);
+
+  const userId = isAuthenticated() && isAuthenticated().user.id;
+  console.log("USERID", userId);
   const loadAllRoutes = () => {
-    getRoutes().then((data) => {
-      // if (data.error) {
-      //   setError(data.error);
-      //   console.log(error);
-      // } else {
-      //   setRoutes(data);
-      // }
-      // setRoutes(...data);
-      console.log(typeof data);
-      console.log(data);
-    });
+    getRoutes()
+      .then((data) => {
+        //getting and setting the data
+        if (data) {
+          const fData = data.filter((item) => item.user === userId);
+          setFilteredData(fData);
+        }
+      })
+      .catch((err) => console.log("ERR", err));
   };
 
   useEffect(() => {
     loadAllRoutes();
   }, []);
   let history = useHistory();
+
+  console.log("Filtered Data", filteredData);
+
   return (
     <div>
       <h1>Budget Tracker Home</h1>
-      {routes}
-      <span
-        onClick={() => {
-          signout(() => {
-            history.push("/signin");
-          });
-        }}
-      >
-        Signout
-      </span>
+      <div>
+        <span
+          onClick={() => {
+            signout(() => {
+              history.push("/signin");
+            });
+          }}
+        >
+          Signout
+        </span>
+      </div>
+
+      <MainGrid />
     </div>
   );
 }

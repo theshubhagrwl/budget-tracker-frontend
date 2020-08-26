@@ -6,7 +6,7 @@ import { signin, authenticate, isAuthenticated } from "../auth";
 const Signin = () => {
   const [values, setValues] = useState({
     name: "",
-    email: "four@gmail.com",
+    email: "shubh@g.com",
     password: "shubh",
     error: "",
     success: false,
