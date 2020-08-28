@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Grid } from "@material-ui/core";
 import { isAuthenticated } from "../auth";
-import { getRoutes } from "./coreapicalls";
+import { getData } from "./coreapicalls";
 import SubGrid from "./SubGrid";
 
 const MainGrid = () => {
@@ -11,8 +11,8 @@ const MainGrid = () => {
   const userId = isAuthenticated() && isAuthenticated().user.id;
   // console.log("USERID", userId);
 
-  const loadAllRoutes = () => {
-    getRoutes().then((data) => {
+  const loadData = () => {
+    getData().then((data) => {
       //getting and setting the data
       if (data) {
         var fData = data.filter(
@@ -31,10 +31,10 @@ const MainGrid = () => {
   };
 
   useEffect(() => {
-    loadAllRoutes();
+    loadData();
   }, []);
 
-  // console.log(expenseData);
+  // console.log(incomeData);
   return (
     <div>
       <Grid container spacing={3} justify="center" alignContent="center">

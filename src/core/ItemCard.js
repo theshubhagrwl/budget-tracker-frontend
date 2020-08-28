@@ -6,6 +6,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
+import { deleteItem } from "./coreapicalls";
+
 const useStyles = makeStyles({
   root: {
     // background: "white",
@@ -25,7 +27,8 @@ const useStyles = makeStyles({
   },
 });
 
-const ItemCard = ({ title, description, amount, date }) => {
+const ItemCard = ({ id, title, description, amount, date }) => {
+  // console.log(id);
   const classes = useStyles();
   return (
     <Card className={classes.root} variant="outlined">
@@ -54,7 +57,11 @@ const ItemCard = ({ title, description, amount, date }) => {
         <Button size="small" className={classes.editButton}>
           Edit
         </Button>
-        <Button size="small" className={classes.deleteButton}>
+        <Button
+          size="small"
+          className={classes.deleteButton}
+          onClick={() => deleteItem(id)}
+        >
           Delete
         </Button>
       </CardActions>

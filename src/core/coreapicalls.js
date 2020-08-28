@@ -1,16 +1,54 @@
 import { API } from "../backend";
 import Axios from "axios";
 
-export const getRoutes = () => {
+const { token } = JSON.parse(localStorage.getItem("jwt"));
+console.log("SESSION TOKEN", token);
+export const getData = () => {
   return Axios({
     method: "GET",
     url: `${API}items/list/`,
-    // headers: {
-    //   Authorization: `Bearer ${session_token}`,
-    // },
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   })
     .then((res) => {
       return res.data;
     })
     .catch((e) => console.log(e));
+};
+
+export const deleteItem = (id) => {
+  return Axios({
+    method: "DELETE",
+    url: `${API}items/delete-item/${id}/`,
+    headers: {
+      Authorization: `Token ${token}`,
+    },
+  })
+    .then((res) => {
+      console.log(res.data);
+      // console.log("Deleted Item");
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
+
+export const addItem = (data) => {
+  // console.log(data);
+  return Axios({
+    method: "POST",
+    url: `${API}items/add-item/`,
+    headers: {
+      Authorization: `Token ${token}`,
+      "Content-Type": "application/json",
+    },
+    data: JSON.stringify(data),
+  })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
 };

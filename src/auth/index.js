@@ -1,5 +1,5 @@
 import { API } from "../backend";
-import Axios from "axios";
+// import Axios from "axios";
 
 export const signup = (user) => {
   return fetch(`${API}users/`, {
