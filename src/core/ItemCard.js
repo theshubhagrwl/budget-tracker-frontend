@@ -25,14 +25,14 @@ const useStyles = makeStyles({
   },
 });
 
-const ItemCard = ({ title, description, amount }) => {
+const ItemCard = ({ title, description, amount, date }) => {
   const classes = useStyles();
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent>
         <Typography
-          className={classes.title}
-          color="textSecondary"
+          //   className={classes.title}
+          //   color="textSecondary"
           gutterBottom
         >
           {title}
@@ -40,15 +40,15 @@ const ItemCard = ({ title, description, amount }) => {
         {/* <Typography variant="h5" component="h2">
           title here
         </Typography> */}
-        <Typography className={classes.pos} color="textSecondary">
+        <Typography className={classes.pos} color="primary" gutterBottom>
           ₹{amount}
         </Typography>
-        <Typography variant="body2" component="p">
+        <Typography variant="body1" component="p">
           {description ? <span>{description}</span> : ""}
           {/* {description} */}
           {/* <br /> */}
-          {/* {date} */}
         </Typography>
+        <Typography color="textSecondary">{date}</Typography>
       </CardContent>
       <CardActions className={classes.actionButton}>
         <Button size="small" className={classes.editButton}>

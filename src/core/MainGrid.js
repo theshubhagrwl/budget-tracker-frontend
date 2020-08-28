@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Grid } from "@material-ui/core";
-import IncomeGrid from "./IncomeGrid";
-import ExpenseGrid from "./ExpenseGrid";
 import { isAuthenticated } from "../auth";
 import { getRoutes } from "./coreapicalls";
+import SubGrid from "./SubGrid";
 
 const MainGrid = () => {
   const [incomeData, setIncomeData] = useState([]);
@@ -35,14 +34,15 @@ const MainGrid = () => {
     loadAllRoutes();
   }, []);
 
+  // console.log(expenseData);
   return (
     <div>
       <Grid container spacing={3} justify="center" alignContent="center">
         <Grid item xs={6}>
-          <IncomeGrid incomeData={incomeData} />
+          <SubGrid data={incomeData} name="Income" />
         </Grid>
         <Grid item xs={6}>
-          <ExpenseGrid expenseData={expenseData} />
+          <SubGrid data={expenseData} name="Expense" />
         </Grid>
       </Grid>
     </div>

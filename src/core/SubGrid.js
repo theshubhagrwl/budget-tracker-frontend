@@ -2,39 +2,43 @@ import React, { useState, useEffect } from "react";
 import { Grid, Typography } from "@material-ui/core";
 import ItemCard from "./ItemCard";
 
-const IncomeGrid = ({ incomeData }) => {
-  const [totalIncome, setTotalIncome] = useState(0);
+const SubGrid = ({ data, name }) => {
+  const [localData, setLocalData] = useState(0);
+  //   console.log("Expense Data", data);
 
-  var temp = totalIncome;
-  const getTotalIncome = () => {
-    incomeData.map((i) => {
-      temp += i.amount;
+  var temp = localData;
+  const getlocalData = () => {
+    data.map((i) => {
+      temp = temp + i.amount;
     });
-    setTotalIncome(temp);
+    setLocalData(temp);
   };
 
   useEffect(() => {
-    getTotalIncome();
-  }, [incomeData]);
+    getlocalData();
+  }, [data]);
 
-  if (totalIncome > 0) {
-    console.log("income", totalIncome);
+  if (localData > 0) {
+    console.log("expense", localData);
   }
+
   return (
     <div>
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Typography component="h4" variant="h4">
-            Income
+            {name}
           </Typography>
+          <div>Total Expense : ₹{localData}</div>
           <div>
-            {incomeData.map((i) => {
+            {data.map((i) => {
               return (
                 <ItemCard
                   key={i.id}
                   title={i.title}
                   description={i.description}
                   amount={i.amount}
+                  date={i.date}
                 />
               );
             })}
@@ -44,5 +48,4 @@ const IncomeGrid = ({ incomeData }) => {
     </div>
   );
 };
-
-export default IncomeGrid;
+export default SubGrid;
