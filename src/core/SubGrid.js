@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
 const SubGrid = ({ data, name }) => {
   const classes = useStyles();
   const userId = isAuthenticated() && isAuthenticated().user.id;
+
   const [localData, setLocalData] = useState(0);
   const [showAddItem, setShowAddItem] = useState(false);
   const [newItemData, setNewItemData] = useState({
@@ -26,7 +27,6 @@ const SubGrid = ({ data, name }) => {
     itemType: name.toLowerCase(),
     user: userId,
   });
-  // console.log("Expense Data", data);
 
   const handleChange = (name) => (event) => {
     setNewItemData({
@@ -41,7 +41,7 @@ const SubGrid = ({ data, name }) => {
     addItem(newItemData);
   };
 
-  //Calc the sum of income and expense
+  // //Calc the sum of income and expense
   var temp = localData;
   const getlocalData = () => {
     data.map((i) => {
@@ -54,11 +54,6 @@ const SubGrid = ({ data, name }) => {
     getlocalData();
   }, [data]);
 
-  if (localData > 0) {
-    // console.log("data", localData);
-    console.log("local total", localData);
-  }
-
   return (
     <div>
       <Grid container spacing={3}>
@@ -66,7 +61,9 @@ const SubGrid = ({ data, name }) => {
           <Typography component="h4" variant="h4">
             {name}
           </Typography>
-          <div>Total Expense : ₹{localData}</div>
+          <div>
+            Total {name} : ₹{localData}
+          </div>
           <br />
           <Button
             size="medium"
@@ -102,7 +99,7 @@ const SubGrid = ({ data, name }) => {
           ) : (
             ""
           )}
-          <div>{JSON.stringify(newItemData)}</div>
+          {/* <div>{JSON.stringify(newItemData)}</div> */}
           <div>
             {data.map((i) => {
               return (

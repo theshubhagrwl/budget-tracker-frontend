@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import Base from "../core/Base";
 import { Link, Redirect } from "react-router-dom";
 import { signin, authenticate, isAuthenticated } from "../auth";
-import Axios from "axios";
-import { API } from "../backend";
 
 const Signin = () => {
   const [values, setValues] = useState({
@@ -30,41 +28,14 @@ const Signin = () => {
     setValues({ ...values, error: false, [name]: event.target.value });
   };
 
-  // const getToken = async () => {
-  //   try {
-  //     const res = await Axios({
-  //       method: "POST",
-  //       url: `${API}api-token-auth/`,
-  //       data: {
-  //         username: values.email,
-  //         password: values.password,
-  //       },
-  //     });
-  //     return res.data.token;
-  //     // console.log("ToeknData", res.data.token);
-  //     // setValues({ authToken: res.data.token });
-  //     // localStorage.setItem("auth-token", JSON.stringify(res.data.token));
-  //   } catch (e) {
-  //     return console.log(e);
-  //   }
-  // };
-
   const onSubmit = (event) => {
     event.preventDefault();
     setValues({ ...values, error: false, loading: true });
-
-    // getToken()
-    //   .then((data) => {
-    //     console.log("retirnedddata", data);
-    //   })
-    //   .catch((e) => console.log(e));
 
     signin({ email, password })
       .then((data) => {
         console.log("DATA", data);
         if (data.token) {
-          // let session_token = data.token;
-
           authenticate(data, () => {
             console.log("TOKEN ADDED");
             setValues({

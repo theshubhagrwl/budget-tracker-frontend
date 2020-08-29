@@ -3,6 +3,7 @@ import Axios from "axios";
 
 const { token } = JSON.parse(localStorage.getItem("jwt"));
 console.log("SESSION TOKEN", token);
+
 export const getData = () => {
   return Axios({
     method: "GET",
@@ -39,6 +40,24 @@ export const addItem = (data) => {
   return Axios({
     method: "POST",
     url: `${API}items/add-item/`,
+    headers: {
+      Authorization: `Token ${token}`,
+      "Content-Type": "application/json",
+    },
+    data: JSON.stringify(data),
+  })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
+
+export const editItem = (id, data) => {
+  return Axios({
+    method: "PUT",
+    url: `${API}items/items/update-item/${id}/`,
     headers: {
       Authorization: `Token ${token}`,
       "Content-Type": "application/json",

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -7,11 +7,11 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
 import { deleteItem } from "./coreapicalls";
+import { editItem } from "./coreapicalls";
 
 const useStyles = makeStyles({
   root: {
-    // background: "white",
-    margin: "1rem",
+    margin: "0.5rem",
   },
   actionButton: {
     justifyContent: "center",
@@ -30,6 +30,18 @@ const useStyles = makeStyles({
 const ItemCard = ({ id, title, description, amount, date }) => {
   // console.log(id);
   const classes = useStyles();
+  // const [formattedDate, setFormattedDate] = useState("");
+
+  const formatDate = () => {
+    const newDate = new Date(date).toDateString();
+    // const words = newDate.to.split(" ");
+    return newDate;
+  };
+
+  useEffect(() => {
+    formatDate();
+  }, []);
+
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent>
@@ -51,12 +63,15 @@ const ItemCard = ({ id, title, description, amount, date }) => {
           {/* {description} */}
           {/* <br /> */}
         </Typography>
-        <Typography color="textSecondary">{date}</Typography>
+        <Typography color="textSecondary">
+          {/* {date} */}
+          {formatDate()}
+        </Typography>
       </CardContent>
       <CardActions className={classes.actionButton}>
-        <Button size="small" className={classes.editButton}>
+        {/* <Button size="small" className={classes.editButton}>
           Edit
-        </Button>
+        </Button> */}
         <Button
           size="small"
           className={classes.deleteButton}
