@@ -47,10 +47,12 @@ const MainGrid = () => {
       })} */}
       <Grid container spacing={3} justify="center" alignContent="center">
         <Grid item xs={6}>
-          <SubGrid data={value.income[0]} name="Income" />
+          {/* <SubGrid data={value.income[0]} name="Income" /> */}
+          <SubGrid name="Income" />
         </Grid>
         <Grid item xs={6}>
-          <SubGrid data={value.expense[0]} name="Expense" />
+          {/* <SubGrid data={value.expense[0]} name="Expense" /> */}
+          <SubGrid name="Expense" />
         </Grid>
       </Grid>
     </div>

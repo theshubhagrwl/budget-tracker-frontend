@@ -8,6 +8,8 @@ import Typography from "@material-ui/core/Typography";
 
 import { deleteItem } from "./coreapicalls";
 import { editItem } from "./coreapicalls";
+import { useContext } from "react";
+import { BudgetContext } from "../BudgetContext";
 
 const useStyles = makeStyles({
   root: {
@@ -28,13 +30,13 @@ const useStyles = makeStyles({
 });
 
 const ItemCard = ({ id, title, description, amount, date }) => {
-  // console.log(id);
   const classes = useStyles();
-  // const [formattedDate, setFormattedDate] = useState("");
+
+  const { sUpdate } = useContext(BudgetContext);
+  const [shouldUpdate, setShouldUpdate] = sUpdate;
 
   const formatDate = () => {
     const newDate = new Date(date).toDateString();
-    // const words = newDate.to.split(" ");
     return newDate;
   };
 
@@ -75,7 +77,10 @@ const ItemCard = ({ id, title, description, amount, date }) => {
         <Button
           size="small"
           className={classes.deleteButton}
-          onClick={() => deleteItem(id)}
+          onClick={() => {
+            deleteItem(id);
+            setShouldUpdate(!shouldUpdate);
+          }}
         >
           Delete
         </Button>

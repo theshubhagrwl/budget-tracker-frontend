@@ -15,15 +15,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SubGrid = ({ data, name }) => {
+const SubGrid = ({ name }) => {
+  var data;
   const classes = useStyles();
   const userId = isAuthenticated() && isAuthenticated().user.id;
 
-  const { income, expense } = useContext(BudgetContext);
+  const { income, expense, sUpdate } = useContext(BudgetContext);
   const [incomeData, setIncomeData] = income;
   const [expenseData, setExpenseData] = expense;
 
-  const [update, setUpdate] = useState(false);
+  //To check whether you have to recall the API
+  const [shouldUpdate, setShouldUpdate] = sUpdate;
 
   const [localData, setLocalData] = useState(0);
   const [showAddItem, setShowAddItem] = useState(false);
@@ -34,6 +36,12 @@ const SubGrid = ({ data, name }) => {
     itemType: name.toLowerCase(),
     user: userId,
   });
+
+  if (name === "Income") {
+    data = incomeData;
+  } else {
+    data = expenseData;
+  }
 
   const handleChange = (name) => (event) => {
     setNewItemData({
@@ -47,7 +55,7 @@ const SubGrid = ({ data, name }) => {
     setNewItemData({ ...newItemData });
     setShowAddItem(false);
     addItem(newItemData);
-    setUpdate(!update);
+    setShouldUpdate(!shouldUpdate);
   };
 
   // //Calc the sum of income and expense
@@ -76,7 +84,7 @@ const SubGrid = ({ data, name }) => {
       setExpenseData(fData);
     });
     //Refreshing data from the API
-  }, [update]);
+  }, [shouldUpdate]);
 
   return (
     <div>

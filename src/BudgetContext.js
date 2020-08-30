@@ -9,6 +9,7 @@ export const BudgetProvider = (props) => {
 
   const [incomeData, setIncomeData] = useState([]);
   const [expenseData, setExpenseData] = useState([]);
+  const [shouldUpdate, setShouldUpdate] = useState(false);
 
   const loadData = () => {
     getData()
@@ -37,6 +38,7 @@ export const BudgetProvider = (props) => {
       value={{
         income: [incomeData, setIncomeData],
         expense: [expenseData, setExpenseData],
+        sUpdate: [shouldUpdate, setShouldUpdate],
       }}
     >
       {props.children}
