@@ -27,6 +27,7 @@ export const deleteItem = (id) => {
     },
   })
     .then((res) => {
+      // return res.data
       console.log(res.data);
       // console.log("Deleted Item");
     })
@@ -47,7 +48,7 @@ export const addItem = (data) => {
     data: JSON.stringify(data),
   })
     .then((res) => {
-      console.log(res);
+      console.log(res.data);
     })
     .catch((e) => {
       console.log(e);
@@ -65,7 +66,7 @@ export const editItem = (id, data) => {
     data: JSON.stringify(data),
   })
     .then((res) => {
-      console.log(res);
+      console.log(res.data);
     })
     .catch((e) => {
       console.log(e);

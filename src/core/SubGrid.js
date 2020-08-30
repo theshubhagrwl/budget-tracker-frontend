@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Grid, Typography } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import ItemCard from "./ItemCard";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { isAuthenticated } from "../auth";
-import { addItem } from "./coreapicalls";
+import { addItem, getData } from "./coreapicalls";
+import { BudgetContext } from "../BudgetContext";
 
 const useStyles = makeStyles((theme) => ({
   deleteButton: {
@@ -17,6 +18,12 @@ const useStyles = makeStyles((theme) => ({
 const SubGrid = ({ data, name }) => {
   const classes = useStyles();
   const userId = isAuthenticated() && isAuthenticated().user.id;
+
+  const { income, expense } = useContext(BudgetContext);
+  const [incomeData, setIncomeData] = income;
+  const [expenseData, setExpenseData] = expense;
+
+  const [update, setUpdate] = useState(false);
 
   const [localData, setLocalData] = useState(0);
   const [showAddItem, setShowAddItem] = useState(false);
@@ -38,12 +45,14 @@ const SubGrid = ({ data, name }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setNewItemData({ ...newItemData });
+    setShowAddItem(false);
     addItem(newItemData);
+    setUpdate(!update);
   };
 
   // //Calc the sum of income and expense
-  var temp = localData;
   const getlocalData = () => {
+    let temp = 0;
     data.map((i) => {
       temp = temp + i.amount;
     });
@@ -52,7 +61,22 @@ const SubGrid = ({ data, name }) => {
 
   useEffect(() => {
     getlocalData();
+    //recalling the API
   }, [data]);
+
+  useEffect(() => {
+    getData().then((data) => {
+      var fData = data.filter(
+        (item) => item.user === userId && item.itemType === "income"
+      );
+      setIncomeData(fData);
+      var fData = data.filter(
+        (item) => item.user === userId && item.itemType === "expense"
+      );
+      setExpenseData(fData);
+    });
+    //Refreshing data from the API
+  }, [update]);
 
   return (
     <div>
@@ -99,7 +123,6 @@ const SubGrid = ({ data, name }) => {
           ) : (
             ""
           )}
-          {/* <div>{JSON.stringify(newItemData)}</div> */}
           <div>
             {data.map((i) => {
               return (
