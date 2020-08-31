@@ -74,7 +74,7 @@ const ItemCard = ({ id, title, description, amount, date }) => {
         {/* <Button size="small" className={classes.editButton}>
           Edit
         </Button> */}
-        <Button
+        {/* <Button
           size="small"
           className={classes.deleteButton}
           onClick={() => {
@@ -83,7 +83,7 @@ const ItemCard = ({ id, title, description, amount, date }) => {
           }}
         >
           Delete
-        </Button>
+        </Button> */}
       </CardActions>
     </Card>
   );
