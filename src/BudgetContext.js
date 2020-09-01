@@ -10,6 +10,7 @@ export const BudgetProvider = (props) => {
   const [incomeData, setIncomeData] = useState([]);
   const [expenseData, setExpenseData] = useState([]);
   const [shouldUpdate, setShouldUpdate] = useState(false);
+  const [curMonth, setCurMonth] = useState("");
 
   const loadData = () => {
     getData()
@@ -39,6 +40,7 @@ export const BudgetProvider = (props) => {
         income: [incomeData, setIncomeData],
         expense: [expenseData, setExpenseData],
         sUpdate: [shouldUpdate, setShouldUpdate],
+        month: [curMonth, setCurMonth],
       }}
     >
       {props.children}

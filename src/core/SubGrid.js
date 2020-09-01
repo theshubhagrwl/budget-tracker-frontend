@@ -6,11 +6,6 @@ import { Grid, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 
-import InputLabel from "@material-ui/core/InputLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-
 import { isAuthenticated } from "../auth";
 import { addItem, getData } from "./coreapicalls";
 import { BudgetContext } from "../BudgetContext";
@@ -44,8 +39,8 @@ const SubGrid = ({ name }) => {
     user: userId,
   });
 
-  const [month, setMonth] = useState("");
-  const [monthData, setMonthData] = useState([]);
+  const { month } = useContext(BudgetContext);
+  const [curMonth, setCurMonth] = month;
 
   if (name === "Income") {
     data = incomeData;
@@ -85,38 +80,23 @@ const SubGrid = ({ name }) => {
   useEffect(() => {
     getData().then((data) => {
       var fData = data.filter(
-        (item) => item.user === userId && item.itemType === "income"
+        (item) =>
+          item.user === userId &&
+          item.itemType === "income" &&
+          item.date.split("-")[1] === curMonth
       );
       setIncomeData(fData);
       var fData = data.filter(
-        (item) => item.user === userId && item.itemType === "expense"
+        (item) =>
+          item.user === userId &&
+          item.itemType === "expense" &&
+          item.date.split("-")[1] === curMonth
       );
       setExpenseData(fData);
     });
     //Refreshing data from the API
-  }, [shouldUpdate]);
+  }, [shouldUpdate, curMonth]);
 
-  const handleMonthSubmit = (event) => {
-    // event.preventDefault();
-    // setMonth(event.target.value);
-    console.log(month);
-
-    if (name === "Income") {
-      var temp;
-      temp = incomeData.filter((i) => i.date.split("-")[1] === month);
-      data = temp;
-      setMonthData(temp);
-      // setIncomeData(temp)
-      console.log(data);
-    } else {
-      var temp;
-      temp = expenseData.filter((i) => i.date.split("-")[1] === month);
-      data = temp;
-      setMonthData(temp);
-      console.log(data);
-    }
-  };
-  var l;
   return (
     <div>
       <Grid container spacing={3}>
@@ -163,80 +143,8 @@ const SubGrid = ({ name }) => {
             ""
           )}
           <br />
-          <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="month-native-simple">Month</InputLabel>
-            <Select
-              native
-              value={month}
-              onChange={(event) => setMonth(event.target.value)}
-              inputProps={{
-                name: "month",
-                id: "month-native-simple",
-              }}
-            >
-              <option aria-label="None" value="" />
-              <option value="01">Jan</option>
-              <option value="02">Feb</option>
-              <option value="03">Mar</option>
-              <option value="04">Apr</option>
-              <option value="05">May</option>
-              <option value="06">June</option>
-              <option value="07">July</option>
-              <option value="08">Aug</option>
-              <option value="09">Sept</option>
-              <option value="10">Oct</option>
-              <option value="11">Nov</option>
-              <option value="12">Dec</option>
-            </Select>
-            <Button
-              size="small"
-              className={classes.deleteButton}
-              onClick={handleMonthSubmit}
-            >
-              Submit
-            </Button>
-          </FormControl>
-          {/* <TextField
-            id="monthName"
-            label="month name"
-            variant="outlined"
-            // onChange={(e) => setMonth(e.target.value)}
-            onChange={onMonthChange}
-          /> */}
           <div>
-            {/* {name === "Income" ? (
-              <div>
-                {(l = incomeData.filter((i) => i.date.split("-")[1] === month))}
-              </div>
-            ) : (
-              <div></div>
-            )} */}
-            {monthData.length > 0
-              ? monthData.map((i) => {
-                  return (
-                    <ItemCard
-                      key={i.id}
-                      id={i.id}
-                      title={i.title}
-                      description={i.description}
-                      amount={i.amount}
-                      date={i.date}
-                    />
-                  );
-                })
-              : data.map((i) => {
-                  return (
-                    <ItemCard
-                      key={i.id}
-                      id={i.id}
-                      title={i.title}
-                      description={i.description}
-                      amount={i.amount}
-                      date={i.date}
-                    />
-                  );
-                })}
-            {/* {data.map((i) => {
+            {data.map((i) => {
               return (
                 <ItemCard
                   key={i.id}
@@ -247,7 +155,7 @@ const SubGrid = ({ name }) => {
                   date={i.date}
                 />
               );
-            })} */}
+            })}
           </div>
         </Grid>
       </Grid>

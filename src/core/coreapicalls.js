@@ -29,7 +29,6 @@ export const deleteItem = (id) => {
     .then((res) => {
       // return res.data
       console.log(res.data);
-      // console.log("Deleted Item");
     })
     .catch((e) => {
       console.log(e);
@@ -37,7 +36,6 @@ export const deleteItem = (id) => {
 };
 
 export const addItem = (data) => {
-  // console.log(data);
   return Axios({
     method: "POST",
     url: `${API}items/add-item/`,

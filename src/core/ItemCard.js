@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -74,7 +74,7 @@ const ItemCard = ({ id, title, description, amount, date }) => {
         {/* <Button size="small" className={classes.editButton}>
           Edit
         </Button> */}
-        {/* <Button
+        <Button
           size="small"
           className={classes.deleteButton}
           onClick={() => {
@@ -83,7 +83,7 @@ const ItemCard = ({ id, title, description, amount, date }) => {
           }}
         >
           Delete
-        </Button> */}
+        </Button>
       </CardActions>
     </Card>
   );
