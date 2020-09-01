@@ -12,8 +12,15 @@ import { useContext } from "react";
 import { BudgetContext } from "../BudgetContext";
 
 const useStyles = makeStyles({
+  mainRoot: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   root: {
-    margin: "0.5rem",
+    margin: "0.5rem 0rem",
+    minWidth: "15%",
+    width: "70%",
   },
   actionButton: {
     justifyContent: "center",
@@ -45,47 +52,49 @@ const ItemCard = ({ id, title, description, amount, date }) => {
   }, []);
 
   return (
-    <Card className={classes.root} variant="outlined">
-      <CardContent>
-        <Typography
-          //   className={classes.title}
-          //   color="textSecondary"
-          gutterBottom
-        >
-          {title}
-        </Typography>
-        {/* <Typography variant="h5" component="h2">
+    <div className={classes.mainRoot}>
+      <Card className={classes.root} variant="outlined">
+        <CardContent>
+          <Typography
+            //   className={classes.title}
+            //   color="textSecondary"
+            gutterBottom
+          >
+            {title}
+          </Typography>
+          {/* <Typography variant="h5" component="h2">
           title here
         </Typography> */}
-        <Typography className={classes.pos} color="primary" gutterBottom>
-          ₹{amount}
-        </Typography>
-        <Typography variant="body1" component="p">
-          {description ? <span>{description}</span> : ""}
-          {/* {description} */}
-          {/* <br /> */}
-        </Typography>
-        <Typography color="textSecondary">
-          {/* {date} */}
-          {formatDate()}
-        </Typography>
-      </CardContent>
-      <CardActions className={classes.actionButton}>
-        {/* <Button size="small" className={classes.editButton}>
+          <Typography className={classes.pos} color="primary" gutterBottom>
+            ₹{amount}
+          </Typography>
+          <Typography variant="body1" component="p">
+            {description ? <span>{description}</span> : ""}
+            {/* {description} */}
+            {/* <br /> */}
+          </Typography>
+          <Typography color="textSecondary">
+            {/* {date} */}
+            {formatDate()}
+          </Typography>
+        </CardContent>
+        <CardActions className={classes.actionButton}>
+          {/* <Button size="small" className={classes.editButton}>
           Edit
         </Button> */}
-        <Button
-          size="small"
-          className={classes.deleteButton}
-          onClick={() => {
-            deleteItem(id);
-            setShouldUpdate(!shouldUpdate);
-          }}
-        >
-          Delete
-        </Button>
-      </CardActions>
-    </Card>
+          <Button
+            size="small"
+            className={classes.deleteButton}
+            onClick={() => {
+              deleteItem(id);
+              setShouldUpdate(!shouldUpdate);
+            }}
+          >
+            Delete
+          </Button>
+        </CardActions>
+      </Card>
+    </div>
   );
 };
 export default ItemCard;

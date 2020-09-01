@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 
 import ItemCard from "./ItemCard";
 import TextField from "@material-ui/core/TextField";
-import { Grid, Typography } from "@material-ui/core";
+import { Grid, Typography, FormControl } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -14,6 +14,19 @@ const useStyles = makeStyles((theme) => ({
   deleteButton: {
     backgroundColor: "#e53935",
     color: "white",
+  },
+  addItemButton: {
+    backgroundColor: "#212121",
+    color: "#fff",
+  },
+  submitButton: {
+    backgroundColor: "#00c853",
+    color: "white",
+  },
+  textFieldStyle: {
+    margin: theme.spacing(1),
+    width: "25ch",
+    marginBottom: "1rem",
   },
 }));
 
@@ -101,7 +114,7 @@ const SubGrid = ({ name }) => {
     <div>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <Typography component="h4" variant="h4">
+          <Typography component="h5" variant="h5">
             {name}
           </Typography>
           <div>
@@ -110,35 +123,42 @@ const SubGrid = ({ name }) => {
           <br />
           <Button
             size="medium"
-            className={classes.deleteButton}
+            className={classes.addItemButton}
             onClick={() => {
               setShowAddItem(!showAddItem);
             }}
           >
             Add Item
           </Button>
+          <br />
           {showAddItem ? (
-            <div>
+            <FormControl>
               <TextField
-                id="outlined-basic"
-                label="Add Item Name"
-                variant="outlined"
+                required
+                id="name"
+                label="Enter Name"
+                className={classes.textFieldStyle}
                 onChange={handleChange("title")}
               />
               <TextField
-                id="outlined-basic"
-                label="Add Amount"
-                variant="outlined"
+                required
+                id="amount"
+                label="Amount"
+                type="number"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                className={classes.textFieldStyle}
                 onChange={handleChange("amount")}
               />
               <Button
                 size="small"
-                className={classes.deleteButton}
+                className={classes.submitButton}
                 onClick={handleSubmit}
               >
                 Submit
               </Button>
-            </div>
+            </FormControl>
           ) : (
             ""
           )}

@@ -11,7 +11,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120,
+    minWidth: 150,
   },
   deleteButton: {
     backgroundColor: "#e53935",
@@ -43,19 +43,20 @@ const MainGrid = () => {
           }}
         >
           <option aria-label={curMonth} value="" />
-          <option value="01">Jan</option>
-          <option value="02">Feb</option>
-          <option value="03">Mar</option>
-          <option value="04">Apr</option>
+          <option value="01">January</option>
+          <option value="02">February</option>
+          <option value="03">March</option>
+          <option value="04">April</option>
           <option value="05">May</option>
           <option value="06">June</option>
           <option value="07">July</option>
-          <option value="08">Aug</option>
-          <option value="09">Sept</option>
-          <option value="10">Oct</option>
-          <option value="11">Nov</option>
-          <option value="12">Dec</option>
+          <option value="08">August</option>
+          <option value="09">September</option>
+          <option value="10">October</option>
+          <option value="11">November</option>
+          <option value="12">December</option>
         </Select>
+        <FormHelperText>Filter by month</FormHelperText>
       </FormControl>
       <Grid container spacing={3} justify="center" alignContent="center">
         <Grid item xs={6}>

@@ -1,28 +1,33 @@
 import React from "react";
-import { signout } from "../auth";
-import { useHistory } from "react-router-dom";
 import MainGrid from "./MainGrid";
 import { BudgetProvider } from "../BudgetContext";
+// import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+// import Menu from "./Menu";
+import Base from "./Base";
+const useStyles = makeStyles({
+  headingStyle: {
+    padding: "1rem",
+    fontWeight: 400,
+  },
+});
 
 export default function Home() {
-  let history = useHistory();
+  const classes = useStyles();
 
   return (
     <BudgetProvider>
-      <h1>Budget Tracker Home</h1>
-      <div>
-        <span
-          onClick={() => {
-            signout(() => {
-              history.push("/signin");
-            });
-          }}
+      <Base title="Budget App">
+        {/* <Menu /> */}
+        {/* <Typography
+          variant="h2"
+          component="h2"
+          className={classes.headingStyle}
         >
-          Signout
-        </span>
-      </div>
-
-      <MainGrid />
+          My Budget
+        </Typography> */}
+        <MainGrid />
+      </Base>
     </BudgetProvider>
   );
 }

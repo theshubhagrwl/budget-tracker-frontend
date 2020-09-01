@@ -1,14 +1,28 @@
 import React from "react";
+import Typography from "@material-ui/core/Typography";
+import Menu from "./Menu";
+import { makeStyles } from "@material-ui/core/styles";
 
-export default function Base({
+const useStyles = makeStyles({
+  headingStyle: {
+    padding: "1rem",
+    fontWeight: 400,
+  },
+});
+
+const Base = ({
   title = "My Title",
   //   description = "My Description",
   //   className = "bg-dark text-white p-4",
   children,
-}) {
+}) => {
+  const classes = useStyles();
   return (
     <div>
-      <h2>{title}</h2>
+      <Menu />
+      <Typography variant="h2" component="h2" className={classes.headingStyle}>
+        {title}
+      </Typography>
       {children}
       {/* <div className="container-fluid">
         <div className="jumbotron bg-dark text-white text-center">
@@ -28,4 +42,5 @@ export default function Base({
       </footer> */}
     </div>
   );
-}
+};
+export default Base;
