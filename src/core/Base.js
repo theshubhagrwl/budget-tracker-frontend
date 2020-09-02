@@ -20,9 +20,9 @@ const Base = ({
   return (
     <div>
       <Menu />
-      <Typography variant="h2" component="h2" className={classes.headingStyle}>
+      {/* <Typography variant="h2" component="h2" className={classes.headingStyle}>
         {title}
-      </Typography>
+      </Typography> */}
       {children}
       {/* <div className="container-fluid">
         <div className="jumbotron bg-dark text-white text-center">

@@ -1,8 +1,14 @@
 import { API } from "../backend";
 import Axios from "axios";
 
-const { token } = JSON.parse(localStorage.getItem("jwt"));
-console.log("SESSION TOKEN", token);
+var token;
+try {
+  var { token } = JSON.parse(localStorage.getItem("jwt"));
+} catch (error) {
+  console.log(error);
+}
+
+// console.log("SESSION TOKEN", token);
 
 export const getData = () => {
   return Axios({

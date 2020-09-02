@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
     textAlign: "left",
-    fontSize: "2rem",
+    fontSize: "1.3rem",
     [theme.breakpoints.down("xs")]: {
       fontSize: "1rem",
     },
@@ -33,7 +33,7 @@ export default function Navbar() {
       display="flex"
       bgcolor="black"
       color="white"
-      p={2}
+      p={1}
       alignItems="center"
       className={classes.root}
     >
@@ -55,12 +55,12 @@ export default function Navbar() {
           </Button>
         ) : (
           <div>
-            <Link to="/signin">
+            <Link to="/signin" style={{ textDecoration: "none" }}>
               <Button color="secondary" className={classes.rightButton}>
                 Login
               </Button>
             </Link>
-            <Link to="/signup">
+            <Link to="/signup" style={{ textDecoration: "none" }}>
               <Button color="secondary" className={classes.rightButton}>
                 Register
               </Button>
