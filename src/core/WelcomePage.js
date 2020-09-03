@@ -18,13 +18,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "1rem",
     color: "white",
   },
-  mainDiv: {
-    height: "100vh",
-    display: "flex",
-    justifyContent: "center",
-    alignContent: "center",
-    flexDirection: "column",
-  },
+  mainDiv: theme.flexDiv,
 }));
 
 const WelcomePage = () => {

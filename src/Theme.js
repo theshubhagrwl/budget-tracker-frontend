@@ -7,6 +7,13 @@ const theme = createMuiTheme({
       margin: "1rem",
     },
   },
+  flexDiv: {
+    height: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignContent: "center",
+    flexDirection: "column",
+  },
 });
 
 export default theme;

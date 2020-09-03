@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
   rightButton: {
     fontSize: "1rem",
+    color: "#00c853",
     [theme.breakpoints.down("xs")]: {
       fontSize: "0.7rem",
     },
@@ -56,9 +57,7 @@ export default function Navbar() {
         ) : (
           <div>
             <Link to="/signin" style={{ textDecoration: "none" }}>
-              <Button color="secondary" className={classes.rightButton}>
-                Login
-              </Button>
+              <Button className={classes.rightButton}>Login</Button>
             </Link>
             <Link to="/signup" style={{ textDecoration: "none" }}>
               <Button color="secondary" className={classes.rightButton}>
