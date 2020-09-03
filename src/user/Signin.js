@@ -134,6 +134,7 @@ const Signin = () => {
         <Typography variant="h2" component="h2">
           Sign In
         </Typography>
+        {loadingMessage()}
         {errorMessage()}
 
         <FormControl className={classes.formGroup}>
@@ -173,7 +174,7 @@ const Signin = () => {
 
   return (
     <Base title="Welcome to Sign In Page">
-      {loadingMessage()}
+      {/* {loadingMessage()} */}
       {signinForm()}
       {/* <p>{JSON.stringify(values)}</p> */}
       {performRedirect()}

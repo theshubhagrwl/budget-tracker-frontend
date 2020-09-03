@@ -3,7 +3,45 @@ import Base from "../core/Base";
 import { Link } from "react-router-dom";
 import { signup } from "../auth/index";
 
+import { makeStyles } from "@material-ui/core/styles";
+import {
+  Typography,
+  Button,
+  FormControl,
+  TextField,
+  Box,
+} from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  mainDiv: theme.flexDiv,
+  formGroup: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+  },
+  textFields: {
+    width: "20%",
+    margin: "1rem",
+    [theme.breakpoints.down("sm")]: {
+      width: "50%",
+    },
+  },
+  submitButton: {
+    backgroundColor: "#00c853",
+    color: "white",
+    width: "20%",
+    "&:hover": {
+      background: "#00e676",
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "50%",
+    },
+  },
+}));
+
 const Signup = () => {
+  const classes = useStyles();
   const [values, setValues] = useState({
     name: "",
     email: "",
@@ -43,9 +81,22 @@ const Signup = () => {
   const successMessage = () => {
     return (
       <div style={{ display: success ? "" : "none" }}>
-        <p>
-          New Account Created. Please <Link to="/signin"> Login </Link>{" "}
-        </p>
+        <div
+          style={{
+            color: "#43a047",
+          }}
+        >
+          New Account Created. Please{" "}
+          <Link
+            to="/signin"
+            style={{
+              color: "#00e676",
+            }}
+          >
+            {" "}
+            Login{" "}
+          </Link>{" "}
+        </div>
       </div>
     );
   };
@@ -53,35 +104,77 @@ const Signup = () => {
   const errorMessage = () => {
     return (
       <div style={{ display: error ? "" : "none" }}>
-        <p>Check all fields again.</p>
+        <div
+          style={{
+            color: "#e53935",
+          }}
+        >
+          Check all fields again.
+        </div>
       </div>
     );
   };
 
   const signupForm = () => {
     return (
-      <form>
-        <label>Name</label>
-        <input type="text" value={name} onChange={handleChange("name")} />
-        <label>Email</label>
-        <input type="email" value={email} onChange={handleChange("email")} />
-        <label>Password</label>
-        <input
-          type="password"
-          value={password}
-          onChange={handleChange("password")}
-        />
-        <input type="submit" value="Submit" onClick={onSubmit} />
-      </form>
+      <Box component="div" className={classes.mainDiv}>
+        <Typography variant="h2" componen="h2">
+          Sign Up
+        </Typography>
+        {errorMessage()}
+        {successMessage()}
+        <FormControl className={classes.formGroup}>
+          <TextField
+            required
+            type="text"
+            label="Name"
+            value={name}
+            className={classes.textFields}
+            onChange={handleChange("name")}
+          />
+          <TextField
+            required
+            type="email"
+            label="Email"
+            value={email}
+            className={classes.textFields}
+            onChange={handleChange("email")}
+          />
+          <TextField
+            required
+            type="password"
+            label="Password"
+            value={password}
+            className={classes.textFields}
+            onChange={handleChange("password")}
+          />
+          <Button className={classes.submitButton} onClick={onSubmit}>
+            Submit
+          </Button>
+        </FormControl>
+      </Box>
+      // <form>
+      //   <label>Name</label>
+      //   <input type="text" value={name} onChange={handleChange("name")} />
+      //   <label>Email</label>
+      //   <input type="email" value={email} onChange={handleChange("email")} />
+      //   <label>Password</label>
+      //   <input
+      //     type="password"
+      //     value={password}
+      //     onChange={handleChange("password")}
+      //   />
+      //   <input type="submit" value="Submit" onClick={onSubmit} />
+      // </form>
     );
   };
 
   return (
     <Base title="Sign Up Page">
-      {successMessage()}
-      {errorMessage()}
+      {/* {successMessage()} */}
+      {/* {errorMessage()} */}
       {signupForm()}
-      <p>{JSON.stringify(values)}</p>
+      {/* <p>{JSON.stringify(values)}</p> */}
     </Base>
   );
 };
