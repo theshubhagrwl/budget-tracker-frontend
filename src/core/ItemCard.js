@@ -10,8 +10,11 @@ import { deleteItem } from "./coreapicalls";
 import { editItem } from "./coreapicalls";
 import { useContext } from "react";
 import { BudgetContext } from "../BudgetContext";
+import { Box, Grid, Paper } from "@material-ui/core";
 
-const useStyles = makeStyles({
+import clsx from "clsx";
+
+const useStyles = makeStyles((theme) => ({
   mainRoot: {
     display: "flex",
     alignItems: "center",
@@ -20,21 +23,27 @@ const useStyles = makeStyles({
   root: {
     margin: "0.5rem 0rem",
     minWidth: "15%",
-    width: "70%",
-  },
-  actionButton: {
-    justifyContent: "center",
-    alignItems: "center",
+    width: "100%",
   },
   deleteButton: {
     backgroundColor: "#e53935",
     color: "white",
+    marginRight: "1rem",
+    [theme.breakpoints.down("sm")]: {
+      marginRight: "0rem",
+    },
   },
   editButton: {
     backgroundColor: "#1e88e5",
     color: "white",
   },
-});
+  paperStyle: {
+    padding: "0.5rem",
+    margin: "0.5rem",
+    textAlign: "center",
+    borderRadius: "2.2rem",
+  },
+}));
 
 const ItemCard = ({ id, title, description, amount, date }) => {
   const classes = useStyles();
@@ -52,36 +61,34 @@ const ItemCard = ({ id, title, description, amount, date }) => {
   }, []);
 
   return (
-    <div className={classes.mainRoot}>
-      <Card className={classes.root} variant="outlined">
-        <CardContent>
-          <Typography
-            //   className={classes.title}
-            //   color="textSecondary"
-            gutterBottom
-          >
-            {title}
-          </Typography>
-          {/* <Typography variant="h5" component="h2">
-          title here
-        </Typography> */}
-          <Typography className={classes.pos} color="primary" gutterBottom>
-            ₹{amount}
-          </Typography>
-          <Typography variant="body1" component="p">
-            {description ? <span>{description}</span> : ""}
-            {/* {description} */}
-            {/* <br /> */}
-          </Typography>
-          <Typography color="textSecondary">
-            {/* {date} */}
-            {formatDate()}
-          </Typography>
-        </CardContent>
-        <CardActions className={classes.actionButton}>
-          {/* <Button size="small" className={classes.editButton}>
-          Edit
-        </Button> */}
+    <Paper
+      variant="elevation"
+      elevation={4}
+      square={false}
+      className={clsx(classes.mainRoot, classes.paperStyle)}
+      style={{ margin: "0.5rem", width: "65%" }}
+    >
+      <Grid container spacing={3} className={classes.root}>
+        <Grid item xs={12} sm={5} className={classes.mainRoot}>
+          <Box component="div">
+            <Typography
+              variant="body1"
+              style={{ fontSize: "1.2rem", marginBottom: "0.5rem" }}
+            >
+              {title}
+            </Typography>
+            <Typography variant="subtitle2" style={{ marginBottom: "0.5rem" }}>
+              {formatDate()}
+            </Typography>
+          </Box>
+        </Grid>
+        <Grid item xs={12} sm={5} className={classes.mainRoot}>
+          <div>
+            <Typography variant="body1">Amount</Typography>
+            <Box component="span">₹{amount}</Box>
+          </div>
+        </Grid>
+        <Grid item xs={12} sm={2} className={classes.mainRoot}>
           <Button
             size="small"
             className={classes.deleteButton}
@@ -92,9 +99,9 @@ const ItemCard = ({ id, title, description, amount, date }) => {
           >
             Delete
           </Button>
-        </CardActions>
-      </Card>
-    </div>
+        </Grid>
+      </Grid>
+    </Paper>
   );
 };
 export default ItemCard;

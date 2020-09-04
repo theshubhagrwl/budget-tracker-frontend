@@ -2,7 +2,13 @@ import React, { useState, useEffect, useContext } from "react";
 
 import ItemCard from "./ItemCard";
 import TextField from "@material-ui/core/TextField";
-import { Grid, Typography, FormControl } from "@material-ui/core";
+import {
+  Grid,
+  Typography,
+  FormControl,
+  Box,
+  InputAdornment,
+} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -27,6 +33,12 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     width: "25ch",
     marginBottom: "1rem",
+  },
+  cardFlexStyle: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
   },
 }));
 
@@ -91,34 +103,48 @@ const SubGrid = ({ name }) => {
   }, [data]);
 
   useEffect(() => {
-    getData().then((data) => {
-      var fData = data.filter(
-        (item) =>
-          item.user === userId &&
-          item.itemType === "income" &&
-          item.date.split("-")[1] === curMonth
-      );
-      setIncomeData(fData);
-      var fData = data.filter(
-        (item) =>
-          item.user === userId &&
-          item.itemType === "expense" &&
-          item.date.split("-")[1] === curMonth
-      );
-      setExpenseData(fData);
-    });
+    if (curMonth !== "all") {
+      getData().then((data) => {
+        var fData = data.filter(
+          (item) =>
+            item.user === userId &&
+            item.itemType === "income" &&
+            item.date.split("-")[1] === curMonth
+        );
+        setIncomeData(fData.reverse());
+        var fData = data.filter(
+          (item) =>
+            item.user === userId &&
+            item.itemType === "expense" &&
+            item.date.split("-")[1] === curMonth
+        );
+        setExpenseData(fData.reverse());
+      });
+    } else {
+      getData().then((data) => {
+        var fData;
+        fData = data.filter(
+          (item) => item.user === userId && item.itemType === "income"
+        );
+        setIncomeData(fData.reverse());
+        fData = data.filter(
+          (item) => item.user === userId && item.itemType === "expense"
+        );
+        setExpenseData(fData.reverse());
+      });
+    }
     //Refreshing data from the API
   }, [shouldUpdate, curMonth]);
 
   return (
     <div>
-      <Grid container spacing={3}>
+      <Grid container spacing={3} justify="center" alignItems="center">
         <Grid item xs={12}>
-          <Typography component="h5" variant="h5">
+          <Typography component="h4" variant="h4">
             {name}
           </Typography>
           <div>
-            Total {name} : ₹{localData}
+            <Typography component="subtitle2">Total : ₹{localData}</Typography>
           </div>
           <br />
           <Button
@@ -132,38 +158,45 @@ const SubGrid = ({ name }) => {
           </Button>
           <br />
           {showAddItem ? (
-            <FormControl>
-              <TextField
-                required
-                id="name"
-                label="Enter Name"
-                className={classes.textFieldStyle}
-                onChange={handleChange("title")}
-              />
-              <TextField
-                required
-                id="amount"
-                label="Amount"
-                type="number"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                className={classes.textFieldStyle}
-                onChange={handleChange("amount")}
-              />
-              <Button
-                size="small"
-                className={classes.submitButton}
-                onClick={handleSubmit}
-              >
-                Submit
-              </Button>
-            </FormControl>
+            <Box style={{ marginBottom: "1rem" }}>
+              <FormControl>
+                <TextField
+                  required
+                  id="name"
+                  label="Enter Name"
+                  className={classes.textFieldStyle}
+                  onChange={handleChange("title")}
+                />
+                <TextField
+                  required
+                  id="amount"
+                  label="Amount"
+                  type="number"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  className={classes.textFieldStyle}
+                  onChange={handleChange("amount")}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">₹</InputAdornment>
+                    ),
+                  }}
+                />
+                <Button
+                  size="small"
+                  className={classes.submitButton}
+                  onClick={handleSubmit}
+                >
+                  Submit
+                </Button>
+              </FormControl>
+            </Box>
           ) : (
             ""
           )}
           <br />
-          <div>
+          <div className={classes.cardFlexStyle}>
             {data.map((i) => {
               return (
                 <ItemCard

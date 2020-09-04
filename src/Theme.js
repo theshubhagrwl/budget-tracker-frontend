@@ -6,6 +6,13 @@ const theme = createMuiTheme({
       fontWeight: 450,
       margin: "1rem",
     },
+    subtitle2: {
+      fontWeight: 200,
+      // fontFamily : 'Roboto'
+    },
+    body1: {
+      fontWeight: 400,
+    },
   },
   flexDiv: {
     height: "100vh",

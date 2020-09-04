@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Grid } from "@material-ui/core";
+import { Grid, Typography, Box } from "@material-ui/core";
 import SubGrid from "./SubGrid";
 import { BudgetContext } from "../BudgetContext";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -30,7 +30,14 @@ const MainGrid = () => {
   };
 
   return (
-    <div>
+    <Box component="div" style={{ marginTop: "1rem" }}>
+      {curMonth === "All" ? (
+        ""
+      ) : (
+        <Typography variant="h6" component="h6" style={{ fontWeight: "200" }}>
+          Select a month to Filter data
+        </Typography>
+      )}
       <FormControl className={classes.formControl}>
         <InputLabel htmlFor="month-native-simple">Month</InputLabel>
         <Select
@@ -42,7 +49,8 @@ const MainGrid = () => {
             id: "month-native-simple",
           }}
         >
-          <option aria-label={curMonth} value="" />
+          {/* <option aria-label={curMonth} value="" /> */}
+          <option value="all">All</option>
           <option value="01">January</option>
           <option value="02">February</option>
           <option value="03">March</option>
@@ -66,7 +74,7 @@ const MainGrid = () => {
           <SubGrid name="Expense" />
         </Grid>
       </Grid>
-    </div>
+    </Box>
   );
 };
 

@@ -10,7 +10,7 @@ export const BudgetProvider = (props) => {
   const [incomeData, setIncomeData] = useState([]);
   const [expenseData, setExpenseData] = useState([]);
   const [shouldUpdate, setShouldUpdate] = useState(false);
-  const [curMonth, setCurMonth] = useState("");
+  const [curMonth, setCurMonth] = useState("all");
 
   const loadData = () => {
     getData()
@@ -20,11 +20,11 @@ export const BudgetProvider = (props) => {
           var fData = data.filter(
             (item) => item.user === userId && item.itemType === "income"
           );
-          setIncomeData(fData);
+          setIncomeData(fData.reverse());
           fData = data.filter(
             (item) => item.user === userId && item.itemType === "expense"
           );
-          setExpenseData(fData);
+          setExpenseData(fData.reverse());
         }
       })
       .catch((err) => console.log("ERR", err));
