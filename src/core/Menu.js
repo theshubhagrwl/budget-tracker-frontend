@@ -39,7 +39,9 @@ export default function Navbar() {
       className={classes.root}
     >
       <Typography variant="h4" className={classes.title}>
-        Budget Tracker
+        <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+          Home
+        </Link>
       </Typography>
       <Box flexGrow={1} flexShrink={0} textAlign="right">
         {isAuthenticated() ? (

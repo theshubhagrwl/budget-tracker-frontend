@@ -15,6 +15,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { isAuthenticated } from "../auth";
 import { addItem, getData } from "./coreapicalls";
 import { BudgetContext } from "../BudgetContext";
+import Chart from "./Chart";
 
 const useStyles = makeStyles((theme) => ({
   deleteButton: {
@@ -138,6 +139,7 @@ const SubGrid = ({ name }) => {
 
   return (
     <div>
+      {/* <Chart data={data} /> */}
       <Grid container spacing={3} justify="center" alignItems="center">
         <Grid item xs={12}>
           <Typography component="h4" variant="h4">

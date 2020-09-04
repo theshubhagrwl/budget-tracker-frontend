@@ -7,6 +7,7 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { makeStyles } from "@material-ui/core/styles";
+import Chart from "./Chart";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -17,12 +18,19 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#e53935",
     color: "white",
   },
+  flexStyle: {
+    display: "flex",
+    justifyContent: "center",
+    // alignItems: "center",
+  },
 }));
 
 const MainGrid = () => {
   const classes = useStyles();
-  const { month } = useContext(BudgetContext);
+  const { month, income, expense } = useContext(BudgetContext);
   const [curMonth, setCurMonth] = month;
+  const [incomeData, setIncomeData] = income;
+  const [expenseData, setExpenseData] = expense;
 
   const handleMonthSubmit = (event) => {
     event.preventDefault();
@@ -74,6 +82,14 @@ const MainGrid = () => {
           <SubGrid name="Expense" />
         </Grid>
       </Grid>
+      {/* <Grid container spacing={3} justify="center" alignContent="center">
+        <Grid item xs={12}> */}
+      <br />
+      <div className={classes.flexStyle}>
+        <Chart data={incomeData} style={{ marginTop: "3rem" }} />
+      </div>
+      {/* </Grid>
+      </Grid> */}
     </Box>
   );
 };
