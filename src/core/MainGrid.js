@@ -85,11 +85,24 @@ const MainGrid = () => {
       {/* <Grid container spacing={3} justify="center" alignContent="center">
         <Grid item xs={12}> */}
       <br />
-      <div className={classes.flexStyle}>
-        <Chart data={incomeData} style={{ marginTop: "3rem" }} />
-      </div>
-      {/* </Grid>
-      </Grid> */}
+      <Grid container justify="center" alignContent="center">
+        <Grid item xs={12} sm={6}>
+          <Chart
+            data={incomeData}
+            fill="#45CE30"
+            stroke="#019031"
+            name="Income"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Chart
+            data={expenseData}
+            fill="#FFF222"
+            stroke="#EEC213"
+            name="Expense"
+          />
+        </Grid>
+      </Grid>
     </Box>
   );
 };
