@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
   flexStyle: {
     display: "flex",
     justifyContent: "center",
-    // alignItems: "center",
   },
 }));
 
@@ -82,8 +81,6 @@ const MainGrid = () => {
           <SubGrid name="Expense" />
         </Grid>
       </Grid>
-      {/* <Grid container spacing={3} justify="center" alignContent="center">
-        <Grid item xs={12}> */}
       <br />
       <Grid container justify="center" alignContent="center">
         <Grid item xs={12} sm={6}>

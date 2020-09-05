@@ -60,11 +60,9 @@ const Chart = ({ data, fill, stroke, name }) => {
 
   return (
     <Box component="div">
-      <div>
-        <Typography variant="h6" component="h6" className={classes.flexStyle}>
-          {name}
-        </Typography>
-      </div>
+      <Typography variant="h6" component="h6" className={classes.flexStyle}>
+        {name}
+      </Typography>
       <div className={classes.flexStyle}>
         <br />
         <AreaChart

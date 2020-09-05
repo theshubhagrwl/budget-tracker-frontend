@@ -15,7 +15,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { isAuthenticated } from "../auth";
 import { addItem, getData } from "./coreapicalls";
 import { BudgetContext } from "../BudgetContext";
-import Chart from "./Chart";
 
 const useStyles = makeStyles((theme) => ({
   deleteButton: {
@@ -139,14 +138,21 @@ const SubGrid = ({ name }) => {
 
   return (
     <div>
-      {/* <Chart data={data} /> */}
       <Grid container spacing={3} justify="center" alignItems="center">
         <Grid item xs={12}>
           <Typography component="h4" variant="h4">
             {name}
           </Typography>
           <div>
-            <Typography component="subtitle2">Total : ₹{localData}</Typography>
+            {name === "Income" ? (
+              <Typography variant="subtitle2">
+                Total :<span style={{ color: "#43BE31" }}> ₹{localData}</span>
+              </Typography>
+            ) : (
+              <Typography variant="subtitle2">
+                Total :<span style={{ color: "#EC4849" }}> ₹{localData}</span>
+              </Typography>
+            )}
           </div>
           <br />
           <Button
@@ -202,6 +208,7 @@ const SubGrid = ({ name }) => {
             {data.map((i) => {
               return (
                 <ItemCard
+                  name={name}
                   key={i.id}
                   id={i.id}
                   title={i.title}
