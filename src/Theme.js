@@ -8,7 +8,6 @@ const theme = createMuiTheme({
     },
     subtitle2: {
       fontWeight: 200,
-      // fontFamily : 'Roboto'
     },
     body1: {
       fontWeight: 400,
@@ -20,6 +19,29 @@ const theme = createMuiTheme({
     justifyContent: "center",
     alignContent: "center",
     flexDirection: "column",
+  },
+  blackButton: {
+    backgroundColor: "#212121",
+    color: "#fff",
+    border: "1px solid black",
+    "&:hover": {
+      background: "white",
+      border: "0.5px solid black",
+      color: "black",
+    },
+  },
+  greenButton: {
+    backgroundColor: "#00c853",
+    border: "1px solid #00c853",
+    color: "white",
+    "&:hover": {
+      background: "white",
+      color: "#00c853",
+      border: "1px solid #00c853",
+    },
+    // [theme.breakpoints.down("sm")]: {
+    // width: "50%",
+    // },
   },
 });
 

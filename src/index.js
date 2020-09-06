@@ -6,9 +6,14 @@ import Routes from "./Routes";
 import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "./Theme";
 
+// import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+// import MomentUtils from "@date-io/moment";
+
 ReactDOM.render(
   <ThemeProvider theme={theme}>
+    {/* <MuiPickersUtilsProvider utils={MomentUtils}> */}
     <Routes />
+    {/* </MuiPickersUtilsProvider> */}
   </ThemeProvider>,
   document.getElementById("root")
 );

@@ -16,23 +16,23 @@ import { isAuthenticated } from "../auth";
 import { addItem, getData } from "./coreapicalls";
 import { BudgetContext } from "../BudgetContext";
 
+// import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+
 const useStyles = makeStyles((theme) => ({
   deleteButton: {
     backgroundColor: "#e53935",
     color: "white",
   },
-  addItemButton: {
-    backgroundColor: "#212121",
-    color: "#fff",
-  },
-  submitButton: {
-    backgroundColor: "#00c853",
-    color: "white",
-  },
+  addItemButton: theme.blackButton,
+  submitButton: theme.greenButton,
   textFieldStyle: {
     margin: theme.spacing(1),
     width: "25ch",
     marginBottom: "1rem",
+    [theme.breakpoints.down("sm")]: {
+      width: "18ch",
+      margin: "0.2rem",
+    },
   },
   cardFlexStyle: {
     display: "flex",
@@ -66,6 +66,8 @@ const SubGrid = ({ name }) => {
 
   const { month } = useContext(BudgetContext);
   const [curMonth, setCurMonth] = month;
+
+  // const [date, setDate] = useState("");
 
   if (name === "Income") {
     data = incomeData;
@@ -191,6 +193,28 @@ const SubGrid = ({ name }) => {
                     ),
                   }}
                 />
+                {/* <DatePicker
+                  value={date}
+                  onChange={(event) => {
+                    setDate(event.target.value);
+                    handleChange("date");
+                  }}
+                /> */}
+                {/* <MuiPickersUtilsProvider utils={MomentUtils}>
+                  <KeyboardDatePicker
+                    disableToolbar
+                    variant="inline"
+                    format="MM/dd/yyyy"
+                    margin="normal"
+                    id="date-picker-inline"
+                    label="Date picker inline"
+                    value={date}
+                    onChange={setDate(date)}
+                    KeyboardButtonProps={{
+                      "aria-label": "change date",
+                    }}
+                  />
+                </MuiPickersUtilsProvider> */}
                 <Button
                   size="small"
                   className={classes.submitButton}

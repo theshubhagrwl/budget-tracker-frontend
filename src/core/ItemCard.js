@@ -10,6 +10,7 @@ import { useContext } from "react";
 import { BudgetContext } from "../BudgetContext";
 
 import clsx from "clsx";
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   mainRoot: {
@@ -18,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   root: {
-    margin: "0.5rem 0rem",
+    margin: "0.2rem 0rem",
     minWidth: "15%",
     width: "100%",
   },
@@ -26,8 +27,14 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#e53935",
     color: "white",
     marginRight: "1rem",
+    border: "1px solid red",
     [theme.breakpoints.down("sm")]: {
       marginRight: "0rem",
+    },
+    "&:hover": {
+      background: "white",
+      color: "red",
+      border: "1px solid red",
     },
   },
   editButton: {
@@ -35,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
   },
   paperStyle: {
-    padding: "0.5rem",
+    paddingRight: "0.5rem",
     margin: "0.5rem",
     textAlign: "center",
     // borderRadius: "2.2rem",
@@ -49,8 +56,7 @@ const ItemCard = ({ id, title, description, amount, date, name }) => {
   const [shouldUpdate, setShouldUpdate] = sUpdate;
 
   const formatDate = () => {
-    const newDate = new Date(date).toDateString();
-    return newDate;
+    return moment(date).format("D MMM, YYYY");
   };
 
   useEffect(() => {
@@ -74,8 +80,11 @@ const ItemCard = ({ id, title, description, amount, date, name }) => {
             >
               {title}
             </Typography>
-            <Typography variant="subtitle2">{description}</Typography>
-            <Typography variant="subtitle2" style={{ marginBottom: "0.5rem" }}>
+            <Typography variant="subtitle1">{description}</Typography>
+            <Typography
+              variant="subtitle2"
+              style={{ marginBottom: "0.5rem", fontSize: "0.8rem" }}
+            >
               {formatDate()}
             </Typography>
           </Box>

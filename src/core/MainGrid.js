@@ -94,8 +94,8 @@ const MainGrid = () => {
         <Grid item xs={12} sm={6}>
           <Chart
             data={expenseData}
-            fill="#FFF222"
-            stroke="#EEC213"
+            fill="#FF362E"
+            stroke="#B83227"
             name="Expense"
           />
         </Grid>
