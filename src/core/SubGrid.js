@@ -114,7 +114,7 @@ const SubGrid = ({ name }) => {
             item.date.split("-")[1] === curMonth
         );
         setIncomeData(fData.reverse());
-        var fData = data.filter(
+        fData = data.filter(
           (item) =>
             item.user === userId &&
             item.itemType === "expense" &&

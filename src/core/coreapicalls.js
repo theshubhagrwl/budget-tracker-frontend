@@ -1,7 +1,7 @@
 import { API } from "../backend";
 import Axios from "axios";
 
-var token;
+// var token;
 try {
   var { token } = JSON.parse(localStorage.getItem("jwt"));
 } catch (error) {

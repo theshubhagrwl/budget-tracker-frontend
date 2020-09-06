@@ -44,8 +44,8 @@ const Signin = () => {
   const classes = useStyles();
   const [values, setValues] = useState({
     name: "",
-    email: "shubh@g.com",
-    password: "shubh",
+    email: "",
+    password: "",
     error: "",
     success: false,
     loading: false,

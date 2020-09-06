@@ -36,7 +36,11 @@ function CustomTooltip({ payload, label, active }) {
     return (
       <div className={classes.customTooltip}>
         {/* <p className="desc"></p> */}
-        <p className="label">{`₹ ${payload[0].value} in Month: ${label}`}</p>
+        {payload ? (
+          <p className="label">{`₹ ${payload[0].value} in Month: ${label}`}</p>
+        ) : (
+          ""
+        )}
       </div>
     );
   }

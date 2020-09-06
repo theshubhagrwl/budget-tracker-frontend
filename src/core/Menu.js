@@ -50,7 +50,7 @@ export default function Navbar() {
             className={classes.rightButton}
             onClick={() => {
               signout(() => {
-                history.push("/signin");
+                history.push("/");
               });
             }}
           >

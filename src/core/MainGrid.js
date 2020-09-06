@@ -73,6 +73,7 @@ const MainGrid = () => {
         </Select>
         <FormHelperText>Filter by month</FormHelperText>
       </FormControl>
+
       <Grid container spacing={3} justify="center" alignContent="center">
         <Grid item xs={6}>
           <SubGrid name="Income" />
@@ -83,22 +84,30 @@ const MainGrid = () => {
       </Grid>
       <br />
       <Grid container justify="center" alignContent="center">
-        <Grid item xs={12} sm={6}>
-          <Chart
-            data={incomeData}
-            fill="#45CE30"
-            stroke="#019031"
-            name="Income"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Chart
-            data={expenseData}
-            fill="#FF362E"
-            stroke="#B83227"
-            name="Expense"
-          />
-        </Grid>
+        {incomeData.length > 1 ? (
+          <Grid item xs={12} sm={6}>
+            <Chart
+              data={incomeData}
+              fill="#45CE30"
+              stroke="#019031"
+              name="Income"
+            />
+          </Grid>
+        ) : (
+          ""
+        )}
+        {expenseData.length > 0 ? (
+          <Grid item xs={12} sm={6}>
+            <Chart
+              data={expenseData}
+              fill="#FF362E"
+              stroke="#B83227"
+              name="Expense"
+            />
+          </Grid>
+        ) : (
+          ""
+        )}
       </Grid>
     </Box>
   );
