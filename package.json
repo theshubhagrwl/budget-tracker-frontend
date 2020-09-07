@@ -16,13 +16,15 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
-    "recharts": "^1.8.5"
+    "recharts": "^1.8.5",
+    "serve": "^11.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "yarn run build && now ./build --name=budget-tracker-frontend"
   },
   "eslintConfig": {
     "extends": "react-app"
