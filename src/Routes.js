@@ -1,5 +1,4 @@
 import React from "react";
-// import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./core/Home";
 import PrivateRoutes from "./auth/PrivateRoutes";
@@ -13,9 +12,9 @@ const Routes = () => {
     <div>
       <BrowserRouter>
         <Switch>
-          <Route path="/" exact component={WelcomePage} />
-          <Route path="/signin" exact component={Signin} />
-          <Route path="/signup" exact component={Signup} />
+          <Route exact path="/" component={WelcomePage} />
+          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/signin" component={Signin} />
           <PrivateRoutes path="/user/dashboard" exact component={Home} />
         </Switch>
       </BrowserRouter>
