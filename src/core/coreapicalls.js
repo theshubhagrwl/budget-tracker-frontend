@@ -11,14 +11,15 @@ import Axios from "axios";
 //   console.log(error);
 // }
 
-if (localStorage.getItem("jwt")) {
-  var { token } = JSON.parse(localStorage.getItem("jwt"));
-  //TODO: compare JWT with database json token
-}
-
-// console.log("SESSION TOKEN", token);
+const getToken = () => {
+  if (localStorage.getItem("jwt")) {
+    return JSON.parse(localStorage.getItem("jwt"));
+    //TODO: compare JWT with database json token
+  }
+};
 
 export const getData = async () => {
+  var { token } = getToken();
   try {
     const response = await Axios({
       method: "GET",
@@ -38,6 +39,8 @@ export const getData = async () => {
 };
 
 export const deleteItem = async (id) => {
+  var { token } = getToken();
+
   try {
     const response = await Axios({
       method: "DELETE",
@@ -61,6 +64,8 @@ export const deleteItem = async (id) => {
 };
 
 export const addItem = async (data) => {
+  var { token } = getToken();
+
   try {
     const response = await Axios({
       method: "POST",
@@ -84,6 +89,8 @@ export const addItem = async (data) => {
 };
 
 export const editItem = (id, data) => {
+  var { token } = getToken();
+
   return Axios({
     method: "PUT",
     url: `${API}items/items/update-item/${id}/`,
