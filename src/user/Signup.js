@@ -48,9 +48,10 @@ const Signup = () => {
     password: "",
     error: "",
     success: false,
+    loading: false,
   });
 
-  const { name, email, password, error, success } = values;
+  const { name, email, password, error, success, loading } = values;
 
   const handleChange = (name) => (event) => {
     setValues({ ...values, error: false, [name]: event.target.value });
@@ -58,7 +59,7 @@ const Signup = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    setValues({ ...values, error: false });
+    setValues({ ...values, error: false, loading: true });
     signup({ name, email, password })
       .then((data) => {
         console.log(data);
@@ -70,6 +71,7 @@ const Signup = () => {
             password: "",
             error: "",
             success: true,
+            loading: false,
           });
         } else {
           setValues({ ...values, error: true, success: false });
@@ -114,6 +116,15 @@ const Signup = () => {
       </div>
     );
   };
+  const loadingMessage = () => {
+    return (
+      loading && (
+        <div>
+          <h2>Loading....</h2>
+        </div>
+      )
+    );
+  };
 
   const signupForm = () => {
     return (
@@ -121,6 +132,7 @@ const Signup = () => {
         <Typography variant="h2" componen="h2">
           Sign Up
         </Typography>
+        {loadingMessage()}
         {errorMessage()}
         {successMessage()}
         <FormControl className={classes.formGroup}>
