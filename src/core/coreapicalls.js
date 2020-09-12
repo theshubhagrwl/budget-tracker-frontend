@@ -1,14 +1,19 @@
 import { API } from "../backend";
 import Axios from "axios";
 
-var temp;
-try {
-  temp = JSON.parse(localStorage.getItem("jwt"));
-  if (temp != null) {
-    var { token } = temp;
-  }
-} catch (error) {
-  console.log(error);
+// var temp;
+// try {
+//   temp = JSON.parse(localStorage.getItem("jwt"));
+//   if (temp != null) {
+//     var { token } = temp;
+//   }
+// } catch (error) {
+//   console.log(error);
+// }
+
+if (localStorage.getItem("jwt")) {
+  var { token } = JSON.parse(localStorage.getItem("jwt"));
+  //TODO: compare JWT with database json token
 }
 
 // console.log("SESSION TOKEN", token);
