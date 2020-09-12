@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
@@ -54,9 +54,23 @@ const ItemCard = ({ id, title, description, amount, date, name }) => {
 
   const { sUpdate } = useContext(BudgetContext);
   const [shouldUpdate, setShouldUpdate] = sUpdate;
+  const [loading, setLoading] = useState(false);
 
   const formatDate = () => {
     return moment(date).format("D MMM, YYYY");
+  };
+
+  const handleSubmit = async () => {
+    try {
+      setLoading(true);
+      const response = await deleteItem(id);
+      if (response) {
+        setLoading(false);
+      }
+      setShouldUpdate(!shouldUpdate);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -107,12 +121,9 @@ const ItemCard = ({ id, title, description, amount, date, name }) => {
           <Button
             size="small"
             className={classes.deleteButton}
-            onClick={() => {
-              deleteItem(id);
-              setShouldUpdate(!shouldUpdate);
-            }}
+            onClick={handleSubmit}
           >
-            Delete
+            {loading ? <span>Loading....</span> : <span>Delete</span>}
           </Button>
         </Grid>
       </Grid>

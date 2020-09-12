@@ -66,6 +66,7 @@ const SubGrid = ({ name }) => {
 
   const { month } = useContext(BudgetContext);
   const [curMonth, setCurMonth] = month;
+  const [loading, setLoading] = useState(false);
 
   // const [date, setDate] = useState("");
 
@@ -83,10 +84,12 @@ const SubGrid = ({ name }) => {
   };
 
   const handleSubmit = (event) => {
+    setLoading(true);
     event.preventDefault();
     setNewItemData({ ...newItemData });
     setShowAddItem(false);
     addItem(newItemData);
+    setLoading(false);
     setShouldUpdate(!shouldUpdate);
   };
 
@@ -228,21 +231,27 @@ const SubGrid = ({ name }) => {
             ""
           )}
           <br />
-          <div className={classes.cardFlexStyle}>
-            {data.map((i) => {
-              return (
-                <ItemCard
-                  name={name}
-                  key={i.id}
-                  id={i.id}
-                  title={i.title}
-                  description={i.description}
-                  amount={i.amount}
-                  date={i.date}
-                />
-              );
-            })}
-          </div>
+          {loading ? (
+            <Typography variant="h4" component="h4">
+              Loading...
+            </Typography>
+          ) : (
+            <div className={classes.cardFlexStyle}>
+              {data.map((i) => {
+                return (
+                  <ItemCard
+                    name={name}
+                    key={i.id}
+                    id={i.id}
+                    title={i.title}
+                    description={i.description}
+                    amount={i.amount}
+                    date={i.date}
+                  />
+                );
+              })}
+            </div>
+          )}
         </Grid>
       </Grid>
     </div>
